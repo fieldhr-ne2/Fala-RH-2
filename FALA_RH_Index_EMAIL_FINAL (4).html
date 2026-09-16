@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<title>FALA RH</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--orange:#ff6a00;--orange2:#ff8a2a;--bg:#f6f7f9;--card:#fff;--text:#202124;--muted:#73777d;--line:#e8eaed;--danger:#d93025;--green:#16803c;--shadow:0 8px 28px rgba(20,25,35,.07);--focus-ring:0 0 0 3px rgba(255,106,0,.35)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.55}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden{display:none!important}
+
+/* ═══ Skip link para acessibilidade ═══ */
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--orange);color:#fff;padding:12px 20px;border-radius:0 0 12px 12px;z-index:9999;font-weight:700;text-decoration:none;transition:top .2s}
+.skip-link:focus{top:0}
+
+/* ═══ Focus visible global ═══ */
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+button:focus-visible,a:focus-visible,.form-control:focus-visible,.nav-btn:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+
+#app{min-height:100vh}.login-wrap{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#fff 0%,#fff6ef 100%)}
+.login-card{width:min(430px,100%);background:#fff;border-radius:28px;padding:34px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}.brand-mark{width:48px;height:48px;border-radius:15px;background:var(--orange);color:#fff;display:grid;place-items:center;font-weight:800;font-size:18px}.brand h1{margin:0;font-size:25px}.brand small{color:var(--muted)}
+.form-group{margin:14px 0}
+.password-wrap{position:relative}.password-wrap .form-control{padding-right:48px}.password-wrap .form-control::placeholder{font-style:italic;color:#73706b}.password-wrap .form-control:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,106,0,.12)}.password-eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;color:#34383d;padding:4px;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:8px}.password-eye:hover{color:#111}.password-eye:focus-visible{outline:2px solid var(--orange);outline-offset:2px}.eye-svg{width:22px;height:22px;display:block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.form-group label{display:block;font-size:14px;font-weight:700;margin-bottom:7px}.form-control{width:100%;padding:13px 14px;border:1px solid #dfe2e6;border-radius:12px;outline:none;background:#fff}.form-control:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,106,0,.12)}
+.btn{padding:12px 16px;border-radius:12px;font-weight:700;transition:.15s;min-height:48px;display:inline-flex;align-items:center;justify-content:center}.btn-primary{background:var(--orange);color:#fff}.btn-primary:hover{background:#e95e00}.btn-secondary{background:#fff;border:1px solid var(--line);color:var(--text)}.btn-danger{background:#fff0ef;color:var(--danger)}.btn-success{background:#eaf7ef;color:var(--green)}.btn:disabled{opacity:.55;cursor:not-allowed}
+.full{width:100%}.login-links{text-align:center;margin-top:17px}.link{color:var(--orange);font-weight:700;cursor:pointer;padding:8px 4px;display:inline-block;min-height:44px;line-height:28px;border:0;background:none;font:inherit;text-decoration:underline}.link:focus-visible{outline:2px solid var(--orange);outline-offset:2px}.error{color:var(--danger);font-size:14px;margin-top:10px}.notice{padding:12px 14px;border-radius:12px;background:#fff5eb;color:#9b4700;font-size:14px}
+.app-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;background:var(--orange);color:#fff;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,44px);box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.top-brand{display:flex;align-items:center;gap:10px;font-weight:800}.top-brand .rh{border:2px solid #fff;border-radius:9px;padding:4px 6px;font-size:13px}.top-actions{display:flex;align-items:center;gap:12px}.user-name{font-size:13px;font-weight:600}.logout{background:rgba(255,255,255,.16);color:#fff;padding:9px 13px;border-radius:10px;font-weight:700;min-height:44px}
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 68px)}.sidebar{background:#fff;border-right:1px solid var(--line);padding:22px 14px}.nav-btn{width:100%;text-align:left;padding:12px 13px;border-radius:12px;background:transparent;color:#555;font-weight:700;margin-bottom:6px;min-height:48px}.nav-btn.active,.nav-btn:hover{background:#fff0e5;color:var(--orange)}.main{padding:clamp(18px,3vw,34px);max-width:1500px;width:100%;margin:auto}.welcome{margin-bottom:24px}.welcome h2{margin:0 0 7px;font-size:clamp(22px,3vw,30px)}.welcome p{margin:0;color:var(--muted)}
+.section{display:none}.section.active{display:block}.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 18px}.section-title h2{margin:0;font-size:21px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 3px 14px rgba(20,25,35,.035)}.stat{display:flex;justify-content:space-between;align-items:flex-start}.stat .value{font-size:28px;font-weight:800;margin-top:7px}.stat .label{color:var(--muted);font-size:14px;font-weight:600}.icon-box{width:40px;height:40px;border-radius:12px;background:#fff0e5;color:var(--orange);display:grid;place-items:center;font-weight:800}.comm-card h3{margin:0 0 7px;font-size:18px}.meta{font-size:13px;color:var(--muted);text-align:right;word-break:break-word}.comm-text{white-space:pre-wrap;line-height:1.65;margin:14px 0;font-size:15px}.official{font-size:13px;font-weight:700;color:var(--orange);margin:12px 0}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.between{display:flex;justify-content:space-between;gap:12px;align-items:center}.status{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}.s-aberto{background:#fff0e5;color:#b84b00}.s-aguardando{background:#fff7d8;color:#8b6500}.s-concluido{background:#eaf7ef;color:#16723a}.s-rejeitado{background:#ffeceb;color:#a62821}.s-cancelado{background:#eef0f2;color:#61666d}
+.ticket-card{cursor:pointer}.ticket-card:hover{box-shadow:var(--shadow)}.ticket-card:focus-visible{box-shadow:var(--focus-ring)}.ticket-number{font-weight:800;color:var(--orange)}.empty{padding:34px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #dfe2e6;border-radius:16px}
+.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:15px}.table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:16px;-webkit-overflow-scrolling:touch}.table{width:100%;border-collapse:collapse;min-width:900px}.table th,.table td{padding:12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:top}.table th{background:#fafbfc;color:#666;font-weight:800}.table tr:last-child td{border-bottom:0}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.42);display:none;place-items:center;padding:18px;z-index:100}.modal-backdrop.open{display:grid}.modal{width:min(760px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:22px;box-shadow:0 20px 70px rgba(0,0,0,.2)}.modal h3{margin-top:0}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;flex-wrap:wrap}
+.stars{display:flex;gap:5px}.star{font-size:30px;background:none;color:#c8ccd1;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px}.star.selected{color:#ffad00}.toast{position:fixed;right:18px;bottom:18px;background:#202124;color:#fff;padding:13px 16px;border-radius:12px;z-index:300;box-shadow:var(--shadow);max-width:360px}.loading{position:fixed;inset:0;background:rgba(255,255,255,.68);z-index:250;display:grid;place-items:center}.spinner{width:42px;height:42px;border:4px solid #eee;border-top-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.bottom-nav{display:none}
+.bar{height:10px;background:#eee;border-radius:99px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--orange)}
+.chart-row{margin:12px 0}.chart-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}.small{font-size:13px;color:var(--muted)}.admin-ticket-group{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 3px 14px rgba(0,0,0,.04)}
+.admin-ticket-group-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.admin-ticket-group-title h3{margin:0 0 4px;font-size:18px}
+.count-badge{min-width:34px;height:34px;padding:0 10px;border-radius:999px;background:#fff0e5;color:var(--orange);display:grid;place-items:center;font-weight:800}
+.team-person{display:flex;align-items:center;gap:12px}.team-avatar{width:44px;height:44px;border-radius:14px;background:#fff0e5;color:var(--orange);display:grid;place-items:center;font-weight:800}.team-email{margin-top:15px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:#555;word-break:break-word}
+html,body,#app{width:100%;min-width:0;overflow-x:hidden}
+
+/* ═══ ARIA live region para notificações ═══ */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+@media(max-width:1100px){
+  body{overflow-x:hidden}
+  .layout{grid-template-columns:1fr;min-height:calc(100vh - 62px)}
+  .sidebar{display:none}
+  .bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;width:100%;background:#fff;border-top:1px solid var(--line);z-index:30;padding:7px 6px;justify-content:space-around;padding-bottom:calc(7px + env(safe-area-inset-bottom))}
+  .bottom-nav button{background:none;font-size:12px;font-weight:800;color:#666;padding:7px 5px;min-width:48px;min-height:52px;flex:1;border-radius:8px}
+  .bottom-nav button.active{color:var(--orange);background:#fff0e5}
+  .main{padding:18px 18px 100px;max-width:none;width:100%;min-width:0}
+  .grid{grid-template-columns:1fr 1fr}
+  .filters{grid-template-columns:1fr 1fr}
+  .user-name{display:none}
+  .topbar{height:62px;padding:0 14px}
+  .top-actions{gap:6px}
+  .logout{padding:8px 10px}
+  .user-name{max-width:42vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+@media(max-width:760px){
+  body{font-size:32px}
+  .main{padding:20px 14px 130px}
+  .section-title{align-items:flex-start;flex-direction:column;gap:14px}
+  .section-title h2{font-size:36px}
+  .section-title .btn,.section-title button{width:100%;font-size:28px}
+  .filters{grid-template-columns:1fr}
+  .grid,.grid-2{grid-template-columns:1fr}
+  .card{padding:20px;border-radius:18px}
+  .comm-card h3{font-size:32px}
+  .comm-text{font-size:28px;line-height:1.55}
+  .comm-card .meta{text-align:left;font-size:24px}
+  .official{font-size:24px}
+  .small{font-size:24px}
+  .status{font-size:22px;padding:8px 14px}
+  .stat .value{font-size:48px}
+  .stat .label{font-size:26px}
+  .notice{font-size:26px;line-height:1.5}
+  .form-group label{font-size:28px}
+  .form-control{font-size:28px;padding:18px}
+  .btn{font-size:28px;padding:18px 22px;min-height:80px}
+  .table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .table{min-width:780px}
+  .table th,.table td{font-size:22px;padding:14px}
+  .modal-backdrop{padding:8px}
+  .modal{width:100%;max-width:100%;padding:20px;border-radius:18px}
+  .modal h3{font-size:34px}
+  .modal-actions{flex-direction:column;gap:12px}.modal-actions .btn{width:100%}
+  .login-wrap{padding:14px}
+  .login-card{padding:26px;border-radius:22px}
+  .brand h1{font-size:36px}
+  .brand small{font-size:24px}
+  .brand-mark{width:64px;height:64px;font-size:28px;border-radius:18px}
+  .topbar{height:72px}
+  .top-brand{font-size:28px;gap:10px}
+  .top-brand .rh{padding:4px 8px;font-size:20px;border-radius:8px}
+  .top-actions{font-size:24px}
+  .logout{font-size:24px;padding:12px 18px;min-height:56px}
+  .bottom-nav{padding:10px 4px!important}
+  .bottom-nav button{font-size:20px;padding:8px 4px;min-height:72px;line-height:1.3}
+  .toast{left:12px;right:12px;bottom:100px;max-width:none;text-align:center;font-size:26px}
+  .welcome h2{font-size:40px}
+  .welcome p{font-size:28px}
+  .ticket-number{font-size:28px}
+  .ticket-card{padding:20px}
+  .empty{font-size:26px;padding:34px}
+  .chart-label{font-size:24px}
+  .chart-label b{font-size:26px}
+  .bar{height:18px}
+  .team-person h3{font-size:30px}
+  .team-email{font-size:24px}
+  .team-avatar{width:64px;height:64px;font-size:24px;border-radius:18px}
+  .admin-ticket-group-title h3{font-size:32px}
+  .count-badge{font-size:26px;min-width:48px;height:48px}
+  .icon-box{width:56px;height:56px;font-size:26px;border-radius:16px}
+  .star{font-size:56px;min-width:64px;min-height:64px}
+  .password-eye{width:56px;height:56px}
+  .eye-svg{width:36px;height:36px}
+  .link{font-size:26px;min-height:56px;line-height:36px}
+  .error{font-size:24px}
+  .form-group{margin:18px 0}
+  .chart-row{margin:16px 0}
+  .spinner{width:64px;height:64px;border-width:6px}
+}
+@media(max-width:420px){
+  .main{padding-left:10px;padding-right:10px}
+  .welcome h2{font-size:36px}
+  .section-title h2{font-size:32px}
+  .stat .value{font-size:42px}
+  .stat .label{font-size:24px}
+  .between{flex-direction:column;align-items:flex-start;gap:8px}
+  .comm-card h3{font-size:28px}
+  .btn{font-size:26px;padding:16px 18px}
+  .bottom-nav button{font-size:18px}
+  body{font-size:28px}
+}
+
+/* Fallback for touch/mobile browsers that expose a desktop-width viewport. */
+@media (hover:none) and (pointer:coarse) and (max-width:1200px){
+  .layout{grid-template-columns:1fr!important}
+  .sidebar{display:none!important}
+  .bottom-nav{display:flex!important}
+  .main{width:100%!important;max-width:none!important}
+}
+.mobile-device .layout{grid-template-columns:1fr!important}
+.mobile-device .sidebar{display:none!important}
+.mobile-device .bottom-nav{display:flex!important;position:fixed;left:0;right:0;bottom:0;width:100%}
+.mobile-device .main{width:100%!important;max-width:none!important;min-width:0!important;padding-bottom:104px!important}
+.mobile-device .user-name{display:none!important}
+
+/* HARD MOBILE MODE */
+.mobile-device .layout{display:block!important;grid-template-columns:none!important}
+.mobile-device .sidebar{display:none!important}
+.mobile-device .main{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:20px 14px 130px!important;font-size:32px!important}
+.mobile-device .bottom-nav{display:flex!important;position:fixed!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;z-index:999!important;padding:10px 4px!important}
+.mobile-device .bottom-nav button{font-size:20px!important;min-height:72px!important;line-height:1.3!important}
+.mobile-device .grid,.mobile-device .grid-2{grid-template-columns:1fr!important}
+.mobile-device .filters{grid-template-columns:1fr!important}
+.mobile-device .topbar{height:72px!important;padding:0 12px!important}
+.mobile-device .top-brand{font-size:28px!important}
+.mobile-device .top-brand .rh{font-size:20px!important;padding:4px 8px!important}
+.mobile-device .user-name{display:none!important}
+.mobile-device .logout{font-size:24px!important;padding:12px 18px!important;min-height:56px!important}
+.mobile-device .section-title{flex-direction:column!important;align-items:flex-start!important}
+.mobile-device .section-title h2{font-size:36px!important}
+.mobile-device .section-title .btn,.mobile-device .section-title button{width:100%!important;font-size:28px!important}
+.mobile-device .table-wrap{max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important}
+.mobile-device .table{min-width:780px}
+.mobile-device .table th,.mobile-device .table td{font-size:22px!important}
+.mobile-device .modal-actions{flex-direction:column!important;gap:12px!important}.mobile-device .modal-actions .btn{width:100%!important}
+.mobile-device .between{flex-wrap:wrap}
+.mobile-device .toast{left:12px!important;right:12px!important;bottom:100px!important;max-width:none!important;text-align:center;font-size:26px!important}
+.mobile-device .welcome h2{font-size:40px!important}
+.mobile-device .welcome p{font-size:28px!important}
+.mobile-device .comm-card h3{font-size:32px!important}
+.mobile-device .comm-text{font-size:28px!important;line-height:1.55!important}
+.mobile-device .notice{font-size:26px!important}
+.mobile-device .form-group label{font-size:28px!important}
+.mobile-device .form-control{font-size:28px!important;padding:18px!important}
+.mobile-device .btn{font-size:28px!important;min-height:80px!important}
+.mobile-device .status{font-size:22px!important;padding:8px 14px!important}
+.mobile-device .stat .value{font-size:48px!important}
+.mobile-device .stat .label{font-size:26px!important}
+.mobile-device .small{font-size:24px!important}
+.mobile-device .modal h3{font-size:34px!important}
+.mobile-device .empty{font-size:26px!important}
+.mobile-device .icon-box{width:56px!important;height:56px!important;font-size:26px!important}
+.mobile-device .star{font-size:56px!important;min-width:64px!important;min-height:64px!important}
+.mobile-device .brand h1{font-size:36px!important}
+.mobile-device .brand small{font-size:24px!important}
+.mobile-device .brand-mark{width:64px!important;height:64px!important;font-size:28px!important}
+.mobile-device .link{font-size:26px!important}
+.mobile-device .error{font-size:24px!important}
+.mobile-device .chart-label{font-size:24px!important}
+.mobile-device .bar{height:18px!important}
+.mobile-device .team-avatar{width:64px!important;height:64px!important;font-size:24px!important}
+.mobile-device .team-person h3{font-size:30px!important}
+.mobile-device .team-email{font-size:24px!important}
+.mobile-device .count-badge{font-size:26px!important;min-width:48px!important;height:48px!important}
+.mobile-device .admin-ticket-group-title h3{font-size:32px!important}
+.mobile-device .password-eye{width:56px!important;height:56px!important}
+.mobile-device .eye-svg{width:36px!important;height:36px!important}
+.mobile-device .official{font-size:24px!important}
+.mobile-device .meta{font-size:24px!important}
+.mobile-device .ticket-number{font-size:28px!important}
+
+/* MOBILE FORCE — inclusive quando o navegador estiver em "Site para computador" */
+html.mobile-device,html.mobile-device body,html.mobile-device #app{width:100%!important;min-width:0!important;max-width:100%!important;overflow-x:hidden!important}
+html.mobile-device body{font-size:32px!important}
+html.mobile-device .app-shell{width:100%!important;min-width:0!important}
+html.mobile-device .layout{display:block!important;width:100%!important;min-width:0!important}
+html.mobile-device .sidebar{display:none!important}
+html.mobile-device .main{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:20px 14px 130px!important}
+html.mobile-device .bottom-nav{display:flex!important;position:fixed!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;z-index:9999!important}
+html.mobile-device .grid,html.mobile-device .grid-2,html.mobile-device .filters{grid-template-columns:1fr!important}
+html.mobile-device .table-wrap{max-width:100%!important;overflow-x:auto!important}
+html.mobile-device .welcome h2{font-size:40px!important}
+html.mobile-device .welcome p{font-size:28px!important}
+html.mobile-device .section-title h2{font-size:36px!important}
+html.mobile-device .comm-card h3{font-size:32px!important}
+html.mobile-device .comm-text{font-size:28px!important}
+html.mobile-device .form-group label{font-size:28px!important}
+html.mobile-device .form-control{font-size:28px!important;padding:18px!important}
+html.mobile-device .btn{font-size:28px!important;min-height:80px!important}
+html.mobile-device .notice{font-size:26px!important}
+html.mobile-device .small{font-size:24px!important}
+html.mobile-device .stat .value{font-size:48px!important}
+html.mobile-device .stat .label{font-size:26px!important}
+html.mobile-device .top-brand{font-size:28px!important}
+html.mobile-device .top-brand .rh{font-size:20px!important}
+html.mobile-device .logout{font-size:24px!important;min-height:56px!important}
+html.mobile-device .bottom-nav button{font-size:20px!important;min-height:72px!important}
+html.mobile-device .status{font-size:22px!important}
+html.mobile-device .modal h3{font-size:34px!important}
+html.mobile-device .meta{font-size:24px!important}
+html.mobile-device .official{font-size:24px!important}
+html.mobile-device .link{font-size:26px!important}
+html.mobile-device .error{font-size:24px!important}
+html.mobile-device .star{font-size:56px!important}
+html.mobile-device .icon-box{width:56px!important;height:56px!important;font-size:26px!important}
+html.mobile-device .brand h1{font-size:36px!important}
+html.mobile-device .brand small{font-size:24px!important}
+html.mobile-device .brand-mark{width:64px!important;height:64px!important;font-size:28px!important}
+html.mobile-device .chart-label{font-size:24px!important}
+html.mobile-device .bar{height:18px!important}
+html.mobile-device .count-badge{font-size:26px!important}
+html.mobile-device .admin-ticket-group-title h3{font-size:32px!important}
+html.mobile-device .ticket-number{font-size:28px!important}
+html.mobile-device .team-person h3{font-size:30px!important}
+html.mobile-device .team-email{font-size:24px!important}
+html.mobile-device .team-avatar{width:64px!important;height:64px!important;font-size:24px!important}
+html.mobile-device .empty{font-size:26px!important}
+html.mobile-device .password-eye{width:56px!important;height:56px!important}
+html.mobile-device .eye-svg{width:36px!important;height:36px!important}
+
+/* ═══ Regularização de comportamento mobile ═══ */
+/* Impede ajuste automático de tamanho de texto no iOS landscape */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Remove delay de 300ms no toque e highlight padrão do navegador */
+*{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+/* Impede pull-to-refresh e scroll-chaining em web-app */
+body{overscroll-behavior-y:contain}
+/* Impede zoom automático do iOS ao focar inputs (font-size < 16px causa zoom) */
+input,select,textarea{font-size:max(16px,1em)}
+/* Scroll com momentum em containers com overflow em iOS antigo */
+.table-wrap,.modal{-webkit-overflow-scrolling:touch}
+/* Overscroll containment no modal para não vazar scroll ao fundo */
+.modal{overscroll-behavior:contain}
+
+/* Viewport dinâmico — corrige 100vh que inclui barra de navegação do browser móvel */
+@supports(height:100dvh){
+  .login-wrap{min-height:100dvh}
+  #app{min-height:100dvh}
+  .layout{min-height:calc(100dvh - 68px)}
+  .modal-backdrop{min-height:100dvh}
+}
+@supports(height:100dvh) and (max-width:1100px){
+  .layout{min-height:calc(100dvh - 62px)}
+}
+@supports(height:100dvh) and (max-width:760px){
+  .layout{min-height:calc(100dvh - 58px)}
+}
+
+/* Safe-area insets — protege conteúdo em aparelhos com notch / Dynamic Island / indicador home */
+@supports(padding:env(safe-area-inset-top)){
+  .topbar{padding-top:env(safe-area-inset-top)}
+  .login-wrap{
+    padding-left:max(14px,env(safe-area-inset-left));
+    padding-right:max(14px,env(safe-area-inset-right));
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .bottom-nav{padding-bottom:calc(7px + env(safe-area-inset-bottom))!important}
+}
+@media(max-width:760px){
+  /* Tamanho mínimo de toque ampliado */
+  .bottom-nav button{min-height:72px;min-width:56px}
+  .btn{min-height:80px}
+  .nav-btn{min-height:72px}
+  .star{min-width:64px;min-height:64px}
+  /* Safe-area lateral no conteúdo em landscape */
+  @supports(padding:env(safe-area-inset-left)){
+    .main{
+      padding-left:max(12px,env(safe-area-inset-left));
+      padding-right:max(12px,env(safe-area-inset-right));
+    }
+  }
+}
+
+/* ═══ Acessibilidade: alto contraste e redução de movimento ═══ */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
+}
+@media(prefers-contrast:high){
+  .card{border-width:2px;border-color:#333}
+  .form-control{border-width:2px;border-color:#555}
+  .btn-primary{background:#c05000}
+  .status{border:1px solid currentColor}
+  .small,.meta{color:#555}
+}
+</style>
+</head>
+<body>
+<!-- Skip link acessível -->
+<a class="skip-link" href="#mainContent">Pular para o conteúdo principal</a>
+
+<!-- ARIA live region para anúncios de screen reader -->
+<div aria-live="polite" aria-atomic="true" class="sr-only" id="srAnnounce"></div>
+
+<div id="app">
+<div class="login-wrap" id="loginView" role="main">
+<div class="login-card" role="region" aria-label="Login">
+<div class="brand" aria-hidden="true"><div class="brand-mark">RH</div><div><h1>FALA RH</h1><small>Comunicação com Recursos Humanos</small></div></div>
+<form id="loginForm" aria-label="Formulário de login">
+<div class="form-group"><label for="loginEmail">E-mail</label><input autocomplete="username" class="form-control" id="loginEmail" required="" type="email" aria-required="true"/></div>
+<div class="form-group"><label for="loginPassword">Senha</label><div class="password-wrap"><input autocomplete="current-password" class="form-control" id="loginPassword" minlength="6" placeholder="Digite sua senha atual" required="" type="password" aria-required="true"/><button aria-label="Mostrar senha" class="password-eye" onclick="togglePassword('loginPassword',this)" type="button"><svg aria-hidden="true" class="eye-svg" viewbox="0 0 24 24"><path d="M2.2 12s3.4-6 9.8-6 9.8 6 9.8 6-3.4 6-9.8 6-9.8-6-9.8-6Z"></path><circle cx="12" cy="12" r="2.8"></circle></svg></button></div></div>
+<button class="btn btn-primary full" type="submit">ENTRAR</button>
+<div class="error hidden" id="loginError" role="alert" aria-live="assertive"></div>
+</form>
+<div class="login-links"><button class="link" onclick="openRegister()" type="button">Primeiro acesso / Criar cadastro</button><button class="link" onclick="openResetPassword()" type="button" style="display:block;margin-top:9px">Esqueci minha senha</button></div>
+</div>
+</div>
+<div class="app-shell hidden" id="appView">
+<header class="topbar" role="banner"><div class="top-brand"><span class="rh" aria-hidden="true">RH</span><span>FALA RH</span><span class="hidden" id="adminTag">— Painel</span></div><div class="top-actions"><span class="user-name" id="userName" aria-label="Usuário logado"></span><button class="logout" onclick="logout()" aria-label="Sair do sistema">Sair</button></div></header>
+<div class="layout">
+<aside class="sidebar" id="sideNav" role="navigation" aria-label="Menu principal"></aside>
+<main class="main" id="mainContent" role="main">
+<div class="welcome" aria-live="polite"><h2 id="welcomeTitle"></h2><p id="welcomeText"></p></div>
+<div id="content"></div>
+</main>
+</div>
+<nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Menu de navegação"></nav>
+</div>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" onclick="backdropClose(event)" role="dialog" aria-modal="true" aria-label="Janela de diálogo"><div class="modal" id="modal" tabindex="-1"></div></div>
+<div class="loading hidden" id="loading" role="status" aria-label="Carregando"><div class="spinner" aria-hidden="true"></div><span class="sr-only">Carregando, por favor aguarde...</span></div>
+<div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  function applyMobileFallback(){
+    var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+    var mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+    var mobileData = navigator.userAgentData && navigator.userAgentData.mobile === true;
+    var touch = (navigator.maxTouchPoints||0) > 0 || 'ontouchstart' in window;
+    var portrait = (screen.height || 0) > (screen.width || 0);
+    var touchPortrait = touch && portrait;
+    var mobile = !!(mobileUA || mobileData || touchPortrait);
+    document.documentElement.classList.toggle('mobile-device', mobile);
+  }
+  applyMobileFallback();
+  window.addEventListener('resize', applyMobileFallback);
+  window.addEventListener('orientationchange', function(){setTimeout(applyMobileFallback,150);});
+})();
+const LOCATIONS=['HUB-LCE-01','HUB-LCE-02','HUB-LCE-04','HUB-LCE-05','HUB-LCE-06','HUB-LMA-01','HUB-LMA-02','HUB-LPI-01','HUB-LPI-02','SOC-CE3'];
+const SHIFTS=['Manhã','Tarde','Noite'];
+const CATEGORIES=['Internalização','Folha de pagamento','Benefícios','Ponto','Reembolso','Férias','Desligamento','Maternidade','Paternidade','Atestado','Outros'];
+const TICKET_CATEGORIES=[...CATEGORIES,'ADP'];
+const STATUSES=['ABERTO','AGUARDANDO RETORNO DO CORPORATIVO','CONCLUÍDO','REJEITADO','CANCELADO'];
+const TICKET_STATUSES=['ABERTO','CONCLUÍDO','REJEITADO','AGUARDANDO'];
+let state={user:null,profile:null,token:null,view:null,data:{},busy:false};
+
+/* ═══ Anúncio acessível para screen readers ═══ */
+function srAnnounce(msg){const el=document.getElementById('srAnnounce');if(el){el.textContent='';setTimeout(()=>{el.textContent=msg},60)}}
+
+function api(fn,...args){
+  setLoading(true);
+  return new Promise((resolve,reject)=>{
+    if(typeof google === 'undefined' || !google.script || !google.script.run){
+      setLoading(false);
+      reject(new Error('Abra o FALA RH pela URL do Web App do Google Apps Script.'));
+      return;
+    }
+    const needsToken = !['login','registerUser'].includes(fn);
+    const callArgs = needsToken ? [...args, state.token] : args;
+    google.script.run
+      .withSuccessHandler(r=>{setLoading(false);resolve(r)})
+      .withFailureHandler(e=>{setLoading(false);reject(e)})
+      [fn](...callArgs);
+  });
+}
+function setLoading(v){document.getElementById('loading').classList.toggle('hidden',!v);if(v)srAnnounce('Carregando...')}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hidden');srAnnounce(msg);clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.add('hidden'),3200)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function fmtDate(v){if(!v)return '-';const d=new Date(v);if(isNaN(d))return esc(v);return d.toLocaleDateString('pt-BR')}
+function fmtDateTime(v){if(!v)return '-';const d=new Date(v);if(isNaN(d))return esc(v);return d.toLocaleString('pt-BR')}
+function statusClass(s){return 's-'+({'ABERTO':'aberto','AGUARDANDO RETORNO DO CORPORATIVO':'aguardando','CONCLUÍDO':'concluido','REJEITADO':'rejeitado','CANCELADO':'cancelado'}[s]||'cancelado')}
+function selectHtml(id,opts,selected='',placeholder='Selecione'){return `<select id="${id}" class="form-control" aria-label="${placeholder}"><option value="">${placeholder}</option>${opts.map(x=>`<option ${x===selected?'selected':''} value="${esc(x)}">${esc(x)}</option>`).join('')}</select>`}
+function navItems(){return state.profile==='ADMINISTRATIVO'?[
+ ['home','Fala RH','📣'],['tickets','Chamados','🎫'],['ticketMgmt','Tickets','🧩'],['trends','Tendências','📊'],['comms','Comunicados','📰']
+]:[['home','Fala RH','📣'],['open','Abrir','＋'],['tickets','Chamados','🎫'],['team','Equipe','👥'],['profile','Perfil','👤']]}
+function setupNav(){const items=navItems();const html=items.map(([id,label,ic])=>`<button class="nav-btn ${state.view===id?'active':''}" onclick="go('${id}')" aria-current="${state.view===id?'page':'false'}" aria-label="${label}">${ic} &nbsp; ${label}</button>`).join('');document.getElementById('sideNav').innerHTML=html;document.getElementById('bottomNav').innerHTML=items.map(([id,label,ic])=>`<button class="${state.view===id?'active':''}" onclick="go('${id}')" aria-current="${state.view===id?'page':'false'}" aria-label="${label}"><span aria-hidden="true">${ic}</span><br>${label}</button>`).join('')}
+async function go(view){state.view=view;setupNav();srAnnounce('Navegando para '+view);try{if(view==='home')await loadHome();else if(view==='open')renderOpen();else if(view==='tickets')await loadTickets();else if(view==='ticketMgmt')await loadOperationalTickets();else if(view==='team')await loadTeam();else if(view==='profile')renderProfile();else if(view==='comms')await loadAdminComms();else if(view==='trends')await loadTrends()}catch(e){toast(e.message||'Não foi possível carregar os dados.')}}
+
+function showApp(){document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');document.getElementById('userName').textContent=state.user?.name||state.user?.email||'';document.getElementById('adminTag').classList.toggle('hidden',state.profile!=='ADMINISTRATIVO');document.getElementById('welcomeTitle').textContent=state.profile==='ADMINISTRATIVO'?'Olá! Bem-vindo ao painel administrativo do RH.':'Olá! Seja bem-vindo ao FALA RH.';document.getElementById('welcomeText').textContent=state.profile==='ADMINISTRATIVO'?'Gerencie comunicados, chamados, tickets e indicadores.':'Acompanhe comunicados, abra chamados e conecte-se com o RH.';srAnnounce('Login realizado com sucesso');go(state.profile==='ADMINISTRATIVO'?'home':'home')}
+function logout(){state={user:null,profile:null,token:null,view:null,data:{},busy:false};document.getElementById('appView').classList.add('hidden');document.getElementById('loginView').classList.remove('hidden');document.getElementById('loginPassword').value='';srAnnounce('Sessão encerrada');document.getElementById('loginEmail').focus()}
+document.getElementById('loginForm').addEventListener('submit',async e=>{e.preventDefault();const err=document.getElementById('loginError');err.classList.add('hidden');try{const r=await api('login',document.getElementById('loginEmail').value.trim(),document.getElementById('loginPassword').value);if(!r.success){err.textContent=r.message||'Usuário ou senha inválidos.';err.classList.remove('hidden');srAnnounce(err.textContent);return}state.user=r.user;state.profile=r.profile;state.token=r.token||null;showApp()}catch(x){err.textContent=x.message||'Erro ao realizar login.';err.classList.remove('hidden');srAnnounce(err.textContent)}});
+
+function openRegister(){openModal(`<h3>Criar cadastro</h3><div class="notice" role="note">O cadastro de colaborador é validado pelo backend. O perfil administrativo não pode ser escolhido pelo usuário.</div>
+<div class="form-group"><label for="regName">Nome completo</label><input id="regName" class="form-control" autocomplete="name"></div>
+<div class="form-group"><label for="regEmail">E-mail pessoal</label><input id="regEmail" class="form-control" type="email" autocomplete="email"></div>
+<div class="form-group"><label for="regPhone">WhatsApp</label><input id="regPhone" class="form-control" type="tel" autocomplete="tel" inputmode="tel"></div>
+<div class="form-group"><label for="regLoc">Localidade</label>${selectHtml('regLoc',LOCATIONS)}</div>
+<div class="form-group"><label for="regShift">Turno</label>${selectHtml('regShift',SHIFTS)}</div>
+<div class="form-group"><label for="regPass">Criar nova senha</label><div class="password-wrap"><input id="regPass" class="form-control" type="password" placeholder="Crie uma nova senha" minlength="6" required autocomplete="new-password" aria-required="true"><button type="button" class="password-eye" aria-label="Mostrar senha" onclick="togglePassword('regPass',this)"><svg class="eye-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.2 12s3.4-6 9.8-6 9.8 6 9.8 6-3.4 6-9.8 6-9.8-6-9.8-6Z"></path><circle cx="12" cy="12" r="2.8"></circle></svg></button></div></div>
+<div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Voltar</button><button class="btn btn-primary" onclick="register()">CRIAR CADASTRO</button></div>`)}
+function openResetPassword(){openModal(`<h3>Redefinir senha</h3><p class="small">Informe o mesmo e-mail utilizado no cadastro do FALA RH. O código será enviado somente para o endereço de e-mail cadastrado.</p><div class="form-group"><label for="resetEmail">E-mail cadastrado</label><input id="resetEmail" class="form-control" type="email" autocomplete="email"></div><button class="btn btn-primary full" onclick="sendResetCode()">ENVIAR CÓDIGO</button><div id="resetStep2" class="hidden"><div class="form-group"><label for="resetCode">Código de confirmação</label><input id="resetCode" class="form-control" inputmode="numeric" maxlength="6" placeholder="Digite o código recebido" autocomplete="one-time-code"></div><div class="form-group"><label for="resetPass">Nova senha</label><div class="password-wrap"><input id="resetPass" class="form-control" type="password" placeholder="Crie uma nova senha" minlength="6" autocomplete="new-password"><button type="button" class="password-eye" aria-label="Mostrar senha" onclick="togglePassword('resetPass',this)"><svg class="eye-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.2 12s3.4-6 9.8-6 9.8 6 9.8 6-3.4 6-9.8 6-9.8-6-9.8-6Z"></path><circle cx="12" cy="12" r="2.8"></circle></svg></button></div></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Voltar</button><button class="btn btn-primary" onclick="confirmResetPassword()">REDEFINIR SENHA</button></div></div>`)}
+async function sendResetCode(){try{const e=val('resetEmail');const r=await api('requestPasswordReset',e);if(!r.success)throw Error(r.message);toast(r.message);document.getElementById('resetStep2').classList.remove('hidden');document.getElementById('resetCode').focus()}catch(e){toast(e.message||'Não foi possível enviar o código.')}}
+async function confirmResetPassword(){try{const r=await api('confirmPasswordReset',val('resetEmail'),val('resetCode'),val('resetPass'));if(!r.success)throw Error(r.message);closeModal();document.getElementById('loginEmail').value=val('resetEmail')||'';toast(r.message)}catch(e){toast(e.message||'Não foi possível redefinir a senha.')}}
+
+async function register(){try{const r=await api('registerUser',{name:val('regName'),email:val('regEmail'),whatsapp:val('regPhone'),location:val('regLoc'),shift:val('regShift'),password:val('regPass')});if(!r.success)throw Error(r.message);closeModal();toast('Cadastro realizado com sucesso.');document.getElementById('loginEmail').value=valSafe(r.email)||''}catch(e){toast(e.message||'Não foi possível cadastrar.')}}
+
+function togglePassword(id,btn){const input=document.getElementById(id);if(!input)return;const visible=input.type==='text';input.type=visible?'password':'text';btn.innerHTML='<svg class="eye-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.2 12s3.4-6 9.8-6 9.8 6 9.8 6-3.4 6-9.8 6-9.8-6-9.8-6Z"></path><circle cx="12" cy="12" r="2.8"></circle></svg>';btn.setAttribute('aria-label',visible?'Mostrar senha':'Ocultar senha')}
+function val(id){const x=document.getElementById(id);return x?x.value.trim():''} function valSafe(x){return x||''}
+async function loadHome(){if(state.profile==='ADMINISTRATIVO'){const r=await api('getDashboardAdmin');state.data.home=r;renderAdminHome(r)}else{const r=await api('getCollaboratorHome');state.data.home=r;renderCollaboratorHome(r)}}
+function renderCollaboratorHome(r){
+  const comms=r.communications||[];
+  const notice=(r.allRead===false)&&comms.length?`<div class="notice" role="alert" style="margin-bottom:16px"><b>Leitura obrigatória:</b> leia todos os comunicados para liberar a abertura de chamados. Faltam <b>${esc(r.unreadCount)}</b>.</div>`:'';
+  document.getElementById('content').innerHTML=`<div class="section active"><div class="section-title"><h2>Comunicados do RH</h2></div>${notice}<div class="grid-2">${comms.length?comms.map(commCard).join(''):`<div class="empty">Nenhum comunicado publicado.</div>`}</div></div>`
+}
+function commCard(c){const read=c.read;return `<article class="card comm-card" role="article"><div class="between"><span class="status ${read?'s-concluido':'s-aguardando'}" role="status">${read?'✓ LIDO':'NÃO LIDO'}</span><span class="meta"><time>${esc(c.date)} às ${esc(c.time)}</time></span></div><h3>${esc(c.title)}</h3><div class="comm-text">${esc(c.text)}</div><div class="official">— Comunicado oficial do RH</div><div class="small">Publicado por ${esc(c.publisher)}</div><div class="row" style="margin-top:14px">${read?`<span class="small">✓ Comunicado lido em ${esc(c.readDate)} às ${esc(c.readTime)}</span>`:`<button class="btn btn-primary" onclick="markRead('${esc(c.id)}')" aria-label="Marcar comunicado ${esc(c.title)} como lido">✓ MARCAR COMO LIDO</button>`}</div></article>`}
+async function markRead(id){try{const r=await api('markCommunicationRead',id);if(!r.success)throw Error(r.message);toast(r.message||'Comunicado marcado como lido.');loadHome()}catch(e){toast(e.message)}}
+
+async function renderOpen(){
+  try{
+    const home=await api('getCollaboratorHome');
+    if(home.allRead===false){
+      document.getElementById('content').innerHTML=`<div class="section active"><div class="section-title"><h2>Abrir chamado</h2></div><div class="card"><div class="notice" role="alert"><b>Leitura obrigatória dos comunicados</b><br>Você ainda possui <b>${esc(home.unreadCount)}</b> comunicado(s) não lido(s). Leia todos na aba <b>Fala RH</b> para liberar a abertura de chamados.</div><div class="modal-actions"><button class="btn btn-primary" onclick="go('home')">LER COMUNICADOS</button></div></div></div>`;
+      return;
+    }
+    document.getElementById('content').innerHTML=`<div class="section active"><div class="section-title"><h2>Abrir chamado</h2></div><div class="card"><form id="ticketForm" aria-label="Formulário de abertura de chamado"><div class="grid-2">
+<div class="form-group"><label for="tName">Nome</label><input id="tName" class="form-control" readonly value="${esc(state.user.name)}"></div>
+<div class="form-group"><label for="tEmail">E-mail</label><input id="tEmail" class="form-control" readonly value="${esc(state.user.email)}" type="email"></div>
+<div class="form-group"><label for="tPhone">WhatsApp para contato *</label><input id="tPhone" class="form-control" type="tel" required value="${esc(state.user.whatsapp)}" placeholder="(85) 99999-9999" inputmode="tel" aria-required="true"><div class="small">Este número será usado pelo RH para entrar em contato sobre o chamado.</div></div>
+<div class="form-group"><label for="tLoc">Localidade</label><input id="tLoc" class="form-control" readonly value="${esc(state.user.location)}"></div>
+<div class="form-group"><label for="tShift">Turno</label><input id="tShift" class="form-control" readonly value="${esc(state.user.shift)}"></div>
+<div class="form-group"><label for="tCat">Categoria</label>${selectHtml('tCat',CATEGORIES)}</div></div>
+<div class="form-group"><label for="tDesc">Descrição da solicitação</label><textarea id="tDesc" class="form-control" rows="6" placeholder="Descreva sua solicitação" aria-required="true"></textarea></div>
+<button class="btn btn-primary" type="button" onclick="createTicket()">ABRIR CHAMADO</button></form></div></div>`;
+  }catch(e){toast(e.message||'Não foi possível verificar os comunicados.')}
+}
+async function createTicket(){
+  const category=val('tCat'),description=val('tDesc'),phone=val('tPhone');
+  if(!category){toast('Selecione a categoria do chamado.');document.getElementById('tCat').focus();return}
+  if(!description.trim()){toast('Descreva sua solicitação.');document.getElementById('tDesc').focus();return}
+  if(!phone.trim()){toast('Informe o WhatsApp para contato.');document.getElementById('tPhone').focus();return}
+  openModal(`<h3>Confirmação antes do envio</h3><div class="notice" role="alert">Nossa equipe de Recursos Humanos utilizará o número de telefone cadastrado para entrar em contato caso seja necessário. Caso nossa equipe não consiga contata-lo, seu chamado será rejeitado.</div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal();document.getElementById('tPhone')?.focus()">EDITAR DADOS</button><button class="btn btn-primary" onclick="confirmAndSendTicket()">CIENTE = ENVIAR CHAMADO</button></div>`)
+}
+async function confirmAndSendTicket(){try{const r=await api('createTicket',{category:val('tCat'),description:val('tDesc'),whatsappContato:val('tPhone')});if(!r.success){if(r.blocked){closeModal();toast(r.message);go('home');return}throw Error(r.message);}openModal(`<h3>Chamado aberto com sucesso!</h3><p>Seu número de chamado é</p><div style="font-size:25px;font-weight:800;color:var(--orange)" role="status" aria-live="polite">${esc(r.number)}</div><div class="modal-actions"><button class="btn btn-primary" onclick="closeModal();go('tickets')">ACOMPANHAR CHAMADO</button></div>`)}catch(e){toast(e.message||'Não foi possível abrir o chamado.')}}
+
+async function loadTickets(){if(state.profile==='ADMINISTRATIVO'){const r=await api('getAdminTickets');state.data.tickets=r;renderAdminTickets(r)}else{const r=await api('getMyTickets');state.data.tickets=r;renderMyTickets(r)}}
+function renderMyTickets(r){const active=(r||[]).filter(x=>['ABERTO','AGUARDANDO RETORNO DO CORPORATIVO'].includes(x.status));const hist=(r||[]).filter(x=>!['ABERTO','AGUARDANDO RETORNO DO CORPORATIVO'].includes(x.status));document.getElementById('content').innerHTML=`<div class="section active"><div class="section-title"><h2>Chamados ativos</h2><button class="btn btn-primary" onclick="go('open')" aria-label="Abrir novo chamado">+ Abrir</button></div>${ticketCards(active,true)||'<div class="empty">Nenhum chamado ativo.</div>'}<div class="section-title" style="margin-top:28px"><h2>Histórico</h2></div>${ticketCards(hist,true)||'<div class="empty">Nenhum chamado finalizado.</div>'}</div>`}
+function ticketCards(arr,collab){return arr.map(t=>`<div class="card ticket-card" style="margin-bottom:12px" onclick="viewTicket('${esc(t.id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewTicket('${esc(t.id)}')}" tabindex="0" role="button" aria-label="Chamado ${esc(t.number)}, ${esc(t.category)}, status ${esc(t.status)}"><div class="between"><span class="ticket-number">${esc(t.number)}</span><span class="status ${statusClass(t.status)}">${esc(t.status)}</span></div><div style="margin-top:9px;font-weight:700">${esc(t.category)}</div><div class="small">${esc(t.date)} · ${esc(t.description).slice(0,150)}${esc(t.description).length>150?'…':''}</div></div>`).join('')}
+async function viewTicket(id){try{const t=await api(state.profile==='ADMINISTRATIVO'?'getAdminTicket':'getMyTicket',id);if(!t)throw Error('Chamado não encontrado.');openTicketModal(t)}catch(e){toast(e.message)}}
+function openTicketModal(t){const isAdmin=state.profile==='ADMINISTRATIVO';const actions=isAdmin?adminTicketActions(t):collabTicketActions(t);openModal(`<div class="between"><h3>${esc(t.number)}</h3><span class="status ${statusClass(t.status)}">${esc(t.status)}</span></div><div class="grid-2"><div><b>Colaborador</b><div class="small">${esc(t.name)}</div></div><div><b>E-mail</b><div class="small">${esc(t.email)}</div></div><div><b>WhatsApp</b><div class="small">${esc(t.whatsappContato||t.whatsapp)}</div>${isAdmin&&t.whatsappLink?`<a class="btn btn-success" style="display:inline-block;margin-top:8px;text-decoration:none" href="${esc(t.whatsappLink)}" target="_blank" rel="noopener" aria-label="Entrar em contato pelo WhatsApp com ${esc(t.name)}">💬 Entrar em contato pelo WhatsApp</a>`:''}</div><div><b>Localidade</b><div class="small">${esc(t.location)}</div></div><div><b>Turno</b><div class="small">${esc(t.shift)}</div></div><div><b>Categoria</b><div class="small">${esc(t.category)}</div></div></div><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><b>Descrição</b><p style="white-space:pre-wrap;line-height:1.6">${esc(t.description)}</p>${t.response?`<div class="notice" role="note"><b>Resposta do RH</b><br>${esc(t.response)}</div>`:''}${t.rejection?`<div class="notice" role="alert" style="background:#fff0ef;color:#8f221d"><b>Motivo da rejeição</b><br>${esc(t.rejection)}</div>`:''}<h4>Histórico</h4>${(t.history||[]).map(h=>`<div class="card" style="margin:8px 0;padding:12px"><div class="small"><time>${esc(h.date)} às ${esc(h.time)}</time> · ${esc(h.responsible)}</div><b>${esc(h.newStatus)}</b>${h.observation?`<div class="small">${esc(h.observation)}</div>`:''}</div>`).join('')}${actions}</div>`)}
+function collabTicketActions(t){let s='';if(['ABERTO','AGUARDANDO RETORNO DO CORPORATIVO'].includes(t.status))s+=`<div class="modal-actions"><button class="btn btn-danger" onclick="cancelTicket('${esc(t.id)}')" aria-label="Cancelar chamado ${esc(t.number)}">CANCELAR CHAMADO</button><button class="btn btn-secondary" onclick="hideTicket('${esc(t.id)}')" aria-label="Apagar chamado ${esc(t.number)} do meu histórico">APAGAR DO MEU HISTÓRICO</button></div>`;else s+=`<div class="modal-actions"><button class="btn btn-secondary" onclick="hideTicket('${esc(t.id)}')" aria-label="Apagar chamado ${esc(t.number)} do meu histórico">APAGAR DO MEU HISTÓRICO</button></div>`;if(['CONCLUÍDO','REJEITADO'].includes(t.status)&&!t.feedbackExists)s+=`<hr style="border:0;border-top:1px solid var(--line);margin:20px 0"><h4>Como você avalia o atendimento do RH?</h4><div id="starBox" class="stars" role="radiogroup" aria-label="Avaliação de 1 a 5 estrelas">${[1,2,3,4,5].map(n=>`<button class="star" onclick="setStars(${n})" id="star${n}" role="radio" aria-checked="false" aria-label="${n} estrela${n>1?'s':''}">★</button>`).join('')}</div><div class="form-group"><label for="feedbackComment">Conte-nos como foi sua experiência.</label><textarea id="feedbackComment" class="form-control" rows="4"></textarea></div><button class="btn btn-primary" onclick="sendFeedback('${esc(t.id)}')">ENVIAR FEEDBACK</button>`;return s}
+let selectedStars=0;function setStars(n){selectedStars=n;for(let i=1;i<=5;i++){const el=document.getElementById('star'+i);if(el){el.classList.toggle('selected',i<=n);el.setAttribute('aria-checked',i<=n?'true':'false')}}}
+async function sendFeedback(id){try{if(!selectedStars)throw Error('Selecione uma nota de 1 a 5.');const r=await api('createFeedback',id,selectedStars,val('feedbackComment'));if(!r.success)throw Error(r.message);selectedStars=0;closeModal();toast('Feedback enviado com sucesso.');loadTickets()}catch(e){toast(e.message)}}
+async function hideTicket(id){if(!confirm('Apagar este chamado apenas do seu histórico? Ele continuará disponível para o RH.'))return;try{const r=await api('hideTicketForCollaborator',id);if(!r.success)throw Error(r.message);closeModal();toast('Chamado removido do seu histórico.');loadTickets()}catch(e){toast(e.message)}}
+async function cancelTicket(id){if(!confirm('Tem certeza que deseja cancelar este chamado?'))return;try{const r=await api('cancelTicket',id);if(!r.success)throw Error(r.message);closeModal();toast('Chamado cancelado.');loadTickets()}catch(e){toast(e.message)}}
+
+function adminTicketActions(t){
+  let html=`<div class="card" style="margin-top:18px"><b>Atribuição do chamado</b><div class="small" style="margin:5px 0 10px">Escolha o integrante do RH responsável.</div><div class="row" style="flex-wrap:wrap"><label for="assignSelect" class="sr-only">Responsável pelo chamado</label><select id="assignSelect" class="form-control" style="flex:1;min-width:220px"><option value="">Selecione o responsável</option><option value="elisandra.nascimento@shopee.com">Elisandra — Supervisora de RH</option><option value="maria.joseline@shopee.com">Maria Joseline — Generalista de RH</option><option value="ana.cesario@shopee.com">Ana Beatriz — Aprendiz de RH</option><option value="andressa.valeska@shopee.com">Andressa Valeska — Aprendiz de RH</option><option value="rayssa.ferreira@shopee.com">Rayssa Ferreira — Aprendiz de RH</option></select><button class="btn btn-secondary" onclick="assignTicket('${esc(t.id)}')">ATRIBUIR</button></div></div>`;
+  html+='<div class="modal-actions">';
+  if(t.status==='ABERTO')html+=`<button class="btn btn-primary" onclick="changeTicket('${esc(t.id)}','AGUARDANDO RETORNO DO CORPORATIVO')">AGUARDAR RETORNO DO CORPORATIVO</button>`;
+  if(t.status==='AGUARDANDO RETORNO DO CORPORATIVO')html+=`<button class="btn btn-success" onclick="finishTicket('${esc(t.id)}','CONCLUÍDO')">CONCLUIR CHAMADO</button><button class="btn btn-danger" onclick="finishTicket('${esc(t.id)}','REJEITADO')">REJEITAR CHAMADO</button>`;
+  html+=`<button class="btn btn-danger" onclick="deleteTicketPermanent('${esc(t.id)}')">EXCLUIR PERMANENTEMENTE</button>`;
+  html+='</div>';return html;
+}
+async function deleteTicketPermanent(id){if(!confirm('Excluir permanentemente este chamado? Essa ação removerá o chamado do colaborador, do painel administrativo, do histórico, do feedback e dos tickets relacionados.'))return;try{const r=await api('deleteTicketPermanently',id);if(!r.success)throw Error(r.message);closeModal();toast('Chamado excluído permanentemente.');loadTickets()}catch(e){toast(e.message||'Não foi possível excluir o chamado.')}}
+async function assignTicket(id){
+  const responsible=val('assignSelect');
+  if(!responsible){toast('Selecione o integrante do RH responsável.');document.getElementById('assignSelect').focus();return}
+  try{const r=await api('assignTicket',id,responsible);if(!r.success)throw Error(r.message);toast('Chamado atribuído para '+r.responsible+'.');const t=await api('getAdminTicket',id);openTicketModal(t)}catch(e){toast(e.message||'Não foi possível atribuir o chamado.')}
+}
+async function changeTicket(id,status){const obs=prompt('Observação (opcional):')??'';try{const r=await api('changeTicketStatus',id,status,obs);if(!r.success)throw Error(r.message);closeModal();toast('Chamado atualizado.');loadTickets()}catch(e){toast(e.message)}}
+async function finishTicket(id,status){const promptText=status==='CONCLUÍDO'?'Resposta do RH:':'Motivo/resposta da rejeição:';const response=prompt(promptText);if(response===null||!response.trim())return;const obs=prompt('Observação interna (não será exibida ao colaborador):')??'';try{const r=await api('finalizeTicket',id,status,response,obs);if(!r.success)throw Error(r.message);closeModal();toast(status==='CONCLUÍDO'?'Chamado concluído.':'Chamado rejeitado.');loadTickets()}catch(e){toast(e.message)}}
+
+function renderAdminTickets(r){
+  const list=r||[];
+  document.getElementById('content').innerHTML=`<div class="section active">
+    <div class="section-title"><h2>Chamados</h2><button class="btn btn-secondary" onclick="loadTickets()" aria-label="Atualizar lista de chamados">Atualizar</button></div>
+    <div class="filters" role="search" aria-label="Filtros de chamados">
+      <label for="afSearch" class="sr-only">Pesquisar chamado</label>
+      <input id="afSearch" class="form-control" placeholder="Pesquisar chamado..." oninput="filterAdminTickets()">
+      ${selectHtml('afStatus',STATUSES,'','Todos os status')}
+      ${selectHtml('afCat',CATEGORIES,'','Todas as categorias')}
+      ${selectHtml('afLoc',LOCATIONS,'','Todas as localidades')}
+    </div>
+    <div id="adminTicketTable"></div>
+  </div>`;
+  window.__adminTickets=list;
+  filterAdminTickets();
+  document.getElementById('afStatus').addEventListener('change',filterAdminTickets);
+  document.getElementById('afCat').addEventListener('change',filterAdminTickets);
+  document.getElementById('afLoc').addEventListener('change',filterAdminTickets);
+}
+function filterAdminTickets(){
+  const q=(val('afSearch')||'').toLowerCase(),s=val('afStatus'),c=val('afCat'),l=val('afLoc');
+  const arr=(window.__adminTickets||[]).filter(t=>
+    (!q||[t.number,t.name,t.email,t.responsible,t.category,t.location,t.shift,t.status].join(' ').toLowerCase().includes(q)) &&
+    (!s||t.status===s)&&(!c||t.category===c)&&(!l||t.location===l)
+  );
+
+  const ativos=arr.filter(t=>['ABERTO','AGUARDANDO RETORNO DO CORPORATIVO'].includes(String(t.status)));
+  const finalizados=arr.filter(t=>['CONCLUÍDO','REJEITADO','CANCELADO'].includes(String(t.status)));
+
+  function table(rows,emptyText){
+    return `<div class="table-wrap" tabindex="0" role="region" aria-label="Tabela de chamados"><table class="table" role="table"><thead><tr>
+      <th scope="col">Número</th><th scope="col">Colaborador</th><th scope="col">Localidade</th><th scope="col">Categoria</th><th scope="col">Responsável</th><th scope="col">Data</th><th scope="col">Status</th><th scope="col">Descrição</th>
+    </tr></thead><tbody>${rows.map(t=>`<tr onclick="viewTicket('${esc(t.id)}')" onkeydown="if(event.key==='Enter')viewTicket('${esc(t.id)}')" style="cursor:pointer" tabindex="0" role="button" aria-label="Ver chamado ${esc(t.number)}">
+      <td><b>${esc(t.number)}</b></td>
+      <td>${esc(t.name)}<br><span class="small">${esc(t.email)}</span></td>
+      <td>${esc(t.location)}<br>${esc(t.shift)}</td>
+      <td>${esc(t.category)}</td>
+      <td>${esc(t.responsible||'Não atribuído')}</td>
+      <td>${esc(t.date)}</td>
+      <td><span class="status ${statusClass(t.status)}">${esc(t.status)}</span></td>
+      <td>${esc(t.description)}</td>
+    </tr>`).join('')||`<tr><td colspan="8" class="empty">${emptyText}</td></tr>`}</tbody></table></div>`;
+  }
+
+  document.getElementById('adminTicketTable').innerHTML=`
+    <div class="admin-ticket-group">
+      <div class="admin-ticket-group-title">
+        <div><h3>Chamados ativos</h3><span class="small">Chamados em ABERTO ou AGUARDANDO RETORNO DO CORPORATIVO</span></div>
+        <span class="count-badge" aria-label="${ativos.length} chamados ativos">${ativos.length}</span>
+      </div>
+      ${table(ativos,'Nenhum chamado ativo encontrado.')}
+    </div>
+
+    <div class="admin-ticket-group" style="margin-top:22px">
+      <div class="admin-ticket-group-title">
+        <div><h3>Chamados finalizados</h3><span class="small">CONCLUÍDO, REJEITADO e CANCELADO</span></div>
+        <span class="count-badge" aria-label="${finalizados.length} chamados finalizados">${finalizados.length}</span>
+      </div>
+      ${table(finalizados,'Nenhum chamado finalizado encontrado.')}
+    </div>`;
+}
+
+async function loadAdminComms(){const r=await api('getAdminCommunications');state.data.comms=r;renderAdminComms(r)}
+function renderAdminHome(r){
+  document.getElementById('content').innerHTML=`<div class="section active">
+    <div class="section-title"><h2>Visão geral dos chamados</h2></div>
+    <div class="grid" role="list" aria-label="Estatísticas de chamados">
+      ${statCard('Chamados em aberto',r.ticketStats.abertos,'🟠')}
+      ${statCard('Aguardando retorno do corporativo',r.ticketStats.aguardando,'⏳')}
+      ${statCard('Mais de 7 dias sem conclusão',r.ticketStats.over7,'⚠')}
+      ${statCard('Chamados finalizados',r.ticketStats.finalizados,'✓')}
+    </div>
+  </div>`
+}
+function statCard(label,value,icon){return `<div class="card stat" role="listitem" aria-label="${label}: ${value}"><div><div class="label">${esc(label)}</div><div class="value">${esc(value)}</div></div><div class="icon-box" aria-hidden="true">${icon}</div></div>`}
+function renderAdminComms(r){
+  const all=r||[],ativos=all.filter(c=>String(c.status).toUpperCase()==='ATIVO'),inativos=all.filter(c=>String(c.status).toUpperCase()!=='ATIVO');
+  const card=c=>`<div class="card"><div class="between"><h3 style="margin:0">${esc(c.title)}</h3><span class="status ${c.status==='ATIVO'?'s-concluido':'s-cancelado'}">${esc(c.status)}</span></div><div class="small" style="margin-top:6px"><time>${esc(c.date)} às ${esc(c.time)}</time> · ${esc(c.publisher)}</div><p style="white-space:pre-wrap">${esc(c.text)}</p><div class="row"><span class="small">Visualizações: ${esc(c.views)}</span><span class="small">Leituras: ${esc(c.reads)}</span><span class="small">Não lidos: ${esc(c.unread)}</span></div><div class="row" style="margin-top:14px"><button class="btn btn-secondary" onclick="readers('${esc(c.id)}')" aria-label="Ver quem leu o comunicado ${esc(c.title)}">Ver quem leu</button><button class="btn btn-secondary" onclick='editComm(${JSON.stringify(c)})' aria-label="Editar comunicado ${esc(c.title)}">Editar</button>${c.status==='ATIVO'?`<button class="btn btn-danger" onclick="deleteComm('${esc(c.id)}')" aria-label="Inativar comunicado ${esc(c.title)}">Inativar</button>`:`<button class="btn btn-success" onclick="activateComm('${esc(c.id)}')" aria-label="Ativar comunicado ${esc(c.title)}">Ativar</button>`}</div></div>`;
+  document.getElementById('content').innerHTML=`<div class="section active"><div class="section-title"><h2>Comunicados do RH</h2><button class="btn btn-primary" onclick="newComm()">+ Novo comunicado</button></div><div class="admin-ticket-group"><div class="admin-ticket-group-title"><div><h3>Comunicados ativos</h3><span class="small">Exibidos aos colaboradores e considerados na leitura obrigatória.</span></div><span class="count-badge" aria-label="${ativos.length} comunicados ativos">${ativos.length}</span></div><div class="grid-2">${ativos.map(card).join('')||'<div class="empty">Nenhum comunicado ativo.</div>'}</div></div><div class="admin-ticket-group" style="margin-top:22px"><div class="admin-ticket-group-title"><div><h3>Histórico de comunicados</h3><span class="small">Comunicados inativos permanecem registrados para consulta administrativa.</span></div><span class="count-badge" aria-label="${inativos.length} comunicados inativos">${inativos.length}</span></div><div class="grid-2">${inativos.map(card).join('')||'<div class="empty">Nenhum comunicado inativo.</div>'}</div></div></div>`
+}
+function newComm(){editComm({})}
+function editComm(c){openModal(`<h3>${c.id?'Editar':'Novo'} comunicado</h3><div class="form-group"><label for="cTitle">Título</label><input id="cTitle" class="form-control" value="${esc(c.title)}"></div><div class="form-group"><label for="cText">Texto</label><textarea id="cText" class="form-control" rows="7">${esc(c.text)}</textarea></div><div class="grid-2"><div class="form-group"><label for="cDate">Data</label><input id="cDate" class="form-control" type="date" value="${esc(c.rawDate||'')}"></div><div class="form-group"><label for="cTime">Horário</label><input id="cTime" class="form-control" type="time" value="${esc(c.rawTime||'')}"></div></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Voltar</button><button class="btn btn-primary" onclick="saveComm('${esc(c.id||'')}')">${c.id?'SALVAR':'PUBLICAR COMUNICADO'}</button></div>`)}
+async function saveComm(id){try{const r=await api(id?'updateCommunication':'createCommunication',{id,title:val('cTitle'),text:val('cText'),date:val('cDate'),time:val('cTime')});if(!r.success)throw Error(r.message);closeModal();toast(id?'Comunicado atualizado.':'Comunicado publicado.');loadAdminComms()}catch(e){toast(e.message)}}
+async function activateComm(id){try{const r=await api('activateCommunication',id);if(!r.success)throw Error(r.message);toast('Comunicado ativado.');loadAdminComms()}catch(e){toast(e.message)}}
+async function deleteComm(id){if(!confirm('Apagar este comunicado?'))return;try{const r=await api('deleteCommunication',id);if(!r.success)throw Error(r.message);toast('Comunicado apagado.');loadAdminComms()}catch(e){toast(e.message)}}
+async function readers(id){try{const r=await api('getCommunicationReaders',id);openModal(`<div class="between"><h3>Colaboradores que marcaram como lido</h3><b>TOTAL: ${esc(r.length)}</b></div><div class="table-wrap" tabindex="0" role="region" aria-label="Lista de leitores"><table class="table" role="table"><thead><tr><th scope="col">Nome</th><th scope="col">E-mail</th><th scope="col">Localidade</th><th scope="col">Turno</th><th scope="col">Data</th><th scope="col">Horário</th></tr></thead><tbody>${r.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.email)}</td><td>${esc(x.location)}</td><td>${esc(x.shift)}</td><td>${esc(x.date)}</td><td>${esc(x.time)}</td></tr>`).join('')||'<tr><td colspan="6">Nenhuma leitura registrada.</td></tr>'}</tbody></table></div>`)}catch(e){toast(e.message)}}
+
+
+async function loadOperationalTickets(){const r=await api('getAdminOperationalTickets');state.data.operationalTickets=r;renderOperationalTickets(r)}
+function renderOperationalTickets(r){document.getElementById('content').innerHTML=`<div class="section active"><div class="section-title"><h2>Tickets</h2><button class="btn btn-primary" onclick="newOperationalTicket()">+ Novo ticket</button></div><div class="notice" role="note" style="margin-bottom:15px">Esta planilha é 100% editável pelo RH. Os campos abaixo não são preenchidos automaticamente pelo sistema.</div><div class="filters"><label for="otSearch" class="sr-only">Pesquisar ticket</label><input id="otSearch" class="form-control" placeholder="Pesquisar ticket ou chamado..." oninput="filterOperationalTickets()"></div><div id="operationalTicketTable"></div></div>`;window.__operationalTickets=r||[];filterOperationalTickets()}
+function filterOperationalTickets(){const q=(val('otSearch')||'').toLowerCase();const arr=(window.__operationalTickets||[]).filter(t=>(!q||[t.number,t.chamado,t.category,t.responsible,t.opened,t.returned,t.status].join(' ').toLowerCase().includes(q)));document.getElementById('operationalTicketTable').innerHTML=`<div class="table-wrap" tabindex="0" role="region" aria-label="Tabela de tickets"><table class="table" style="min-width:1000px" role="table"><thead><tr><th scope="col">NÚMERO DO CHAMADO</th><th scope="col">NÚMERO DO TICKET</th><th scope="col">CATEGORIA DO TICKET</th><th scope="col">RESPONSÁVEL</th><th scope="col">DATA DA ABERTURA</th><th scope="col">DATA DO RETORNO</th><th scope="col">STATUS</th></tr></thead><tbody>${arr.map(t=>`<tr onclick="viewOperationalTicket('${esc(t.id)}')" onkeydown="if(event.key==='Enter')viewOperationalTicket('${esc(t.id)}')" style="cursor:pointer" tabindex="0" role="button" aria-label="Ver ticket ${esc(t.number)}"><td>${esc(t.chamado)}</td><td><b>${esc(t.number)}</b></td><td>${esc(t.category)}</td><td>${esc(t.responsible)}</td><td>${esc(t.opened)}</td><td>${esc(t.returned)}</td><td>${esc(t.status)}</td></tr>`).join('')||'<tr><td colspan="7">Nenhum ticket cadastrado.</td></tr>'}</tbody></table></div>`}
+async function newOperationalTicket(){openOperationalTicketModal({});}
+function operationalForm(t){return `<div class="grid-2"><div class="form-group"><label for="otCall">Número do chamado</label><input id="otCall" class="form-control" value="${esc(t.chamado||'')}" placeholder="#RH-2026-000001"></div><div class="form-group"><label for="otNumber">Número do ticket</label><input id="otNumber" class="form-control" value="${esc(t.number||'')}" placeholder="Preencha manualmente"></div><div class="form-group"><label for="otCat">Categoria do ticket</label>${selectHtml('otCat',TICKET_CATEGORIES,t.category||'','Selecione a categoria')}</div><div class="form-group"><label for="otResp">Responsável</label><input id="otResp" class="form-control" value="${esc(t.responsible||'')}"></div><div class="form-group"><label for="otOpened">Data da abertura</label><input id="otOpened" class="form-control" type="date" value="${esc(t.opened||'')}"></div><div class="form-group"><label for="otReturned">Data do retorno</label><input id="otReturned" class="form-control" type="date" value="${esc(t.returned||'')}"></div><div class="form-group"><label for="otStatusText">Status</label><input id="otStatusText" class="form-control" value="${esc(t.status||'')}" placeholder="Digite o status"></div></div>`}
+function openOperationalTicketModal(t){const editing=!!t.id;openModal(`<h3>${editing?'Editar':'Cadastrar'} ticket</h3>${operationalForm(t)}<div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Voltar</button><button class="btn btn-primary" onclick="saveOperationalTicket('${esc(t.id||'')}')">${editing?'SALVAR ALTERAÇÕES':'CADASTRAR TICKET'}</button></div>`)}
+async function saveOperationalTicket(id){try{const data={id:id,numeroChamado:val('otCall'),numeroTicket:val('otNumber'),category:val('otCat'),responsible:val('otResp'),opened:val('otOpened'),returned:val('otReturned'),status:val('otStatusText')};const r=await api(id?'updateOperationalTicket':'createOperationalTicket',data);if(!r.success)throw Error(r.message);closeModal();toast(id?'Ticket atualizado.':'Ticket cadastrado com sucesso.');loadOperationalTickets()}catch(e){toast(e.message)}}
+async function viewOperationalTicket(id){try{const t=await api('getAdminOperationalTicket',id);if(!t)throw Error('Ticket não encontrado.');openOperationalTicketModal(t)}catch(e){toast(e.message)}}
+async function loadTeam(){
+  const r=await api('getTeamContact'),members=r.members||[];
+  document.getElementById('content').innerHTML=`<div class="section active"><div class="section-title"><h2>Equipe de RH</h2></div>
+  <div class="card" style="margin-bottom:16px"><p class="small">Conheça os integrantes responsáveis pelo atendimento do FALA RH.</p><div class="notice" role="note">WhatsApp da equipe: <b>${esc(r.number)}</b></div><a class="btn btn-success" style="display:inline-block;margin-top:14px;text-decoration:none" href="${esc(r.url)}" target="_blank" rel="noopener" aria-label="Falar com a equipe de RH pelo WhatsApp">💬 Falar com a equipe pelo WhatsApp</a></div>
+  <div class="grid-2">${members.map(m=>`<div class="card"><div class="team-person"><div class="team-avatar" aria-hidden="true">${esc(m.name.split(' ').map(x=>x[0]).slice(0,2).join(''))}</div><div><h3 style="margin:0">${esc(m.name)}</h3><div class="small">${esc(m.role)}</div></div></div><div class="team-email">✉ <a href="mailto:${esc(m.email)}">${esc(m.email)}</a></div></div>`).join('')}</div></div>`
+}
+async function loadTrends(){const r=await api('getIndicators');state.data.trends=r;renderTrends(r)}
+function renderTrends(r){
+  const maxDaily=Math.max(1,...(r.dailyOpened||[]).map(x=>x.count));
+  const daily=(r.dailyOpened||[]).map(x=>`<div class="chart-row"><div class="chart-label"><span>${esc(x.date)}</span><b>${esc(x.count)}</b></div><div class="bar" role="progressbar" aria-valuenow="${x.count}" aria-valuemin="0" aria-valuemax="${maxDaily}" aria-label="${esc(x.date)}: ${x.count} chamados"><i style="width:${(x.count/maxDaily)*100}%"></i></div></div>`).join('')||'<div class="small">Sem dados.</div>';
+  document.getElementById('content').innerHTML=`<div class="section active">
+    <div class="section-title"><h2>Tendências</h2></div>
+    <div class="grid" role="list" aria-label="Resumo de tendências">
+      ${statCard('Chamados abertos na semana',r.openedThisWeek,'📅')}
+      ${statCard('Dia com mais chamados',r.topWeekday.day,'🏆')}
+      ${statCard('Categoria mais recorrente',r.topCategory.name,'📌')}
+      ${statCard('Mais chamados atribuídos',r.topResponsible.name,'👤')}
+    </div>
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card"><h3>Chamados abertos por dia — últimos 7 dias</h3>${daily}</div>
+      <div class="card"><h3>Resumo</h3><div class="chart-row"><div class="chart-label"><span>Dia com mais chamados</span><b>${esc(r.topWeekday.day)} (${esc(r.topWeekday.count)})</b></div></div><div class="chart-row"><div class="chart-label"><span>Categoria mais recorrente</span><b>${esc(r.topCategory.name)} (${esc(r.topCategory.count)})</b></div></div><div class="chart-row"><div class="chart-label"><span>Mais atribuído</span><b>${esc(r.topResponsible.name)} (${esc(r.topResponsible.count)})</b></div></div></div>
+      <div class="card"><h3>Chamados por categoria</h3>${chart(r.byCategory,'Categoria')}</div>
+      <div class="card"><h3>Chamados por responsável</h3>${chart(r.byResponsible,'Responsável')}</div>
+      <div class="card"><h3>Chamados por localidade</h3>${chart(r.byLocation,'Localidade')}</div>
+      <div class="card"><h3>Chamados por turno</h3>${chart(r.byShift,'Turno')}</div>
+    </div>
+  </div>`
+}
+function chart(obj,label){const vals=Object.entries(obj||{}),max=Math.max(1,...vals.map(x=>x[1]));return vals.map(([k,v])=>`<div class="chart-row"><div class="chart-label"><span>${esc(k)}</span><b>${esc(v)}</b></div><div class="bar" role="progressbar" aria-valuenow="${v}" aria-valuemin="0" aria-valuemax="${max}" aria-label="${esc(k)}: ${v}"><i style="width:${(v/max)*100}%"></i></div></div>`).join('')||'<div class="small">Sem dados.</div>'}
+
+function renderProfile(){document.getElementById('content').innerHTML=`<div class="section active"><div class="section-title"><h2>Perfil</h2></div><div class="card"><div class="grid-2"><div><b>Nome</b><div class="small">${esc(state.user.name)}</div></div><div><b>E-mail</b><div class="small">${esc(state.user.email)}</div></div><div><b>WhatsApp</b><div class="small">${esc(state.user.whatsapp)}</div></div><div><b>Localidade</b><div class="small">${esc(state.user.location)}</div></div><div><b>Turno</b><div class="small">${esc(state.user.shift)}</div></div><div><b>Perfil</b><div class="small">${esc(state.profile)}</div></div></div></div></div>`}
+
+function openModal(html){
+  const backdrop=document.getElementById('modalBackdrop');
+  const modal=document.getElementById('modal');
+  modal.innerHTML=html;
+  backdrop.classList.add('open');
+  document.body.style.overflow='hidden';
+  // Foco no modal
+  setTimeout(()=>{
+    const first=modal.querySelector('button,input,select,textarea,[tabindex]');
+    if(first)first.focus();
+    else modal.focus();
+  },100);
+  srAnnounce('Janela aberta');
+}
+function closeModal(){
+  document.getElementById('modalBackdrop').classList.remove('open');
+  document.getElementById('modal').innerHTML='';
+  document.body.style.overflow='';
+  srAnnounce('Janela fechada');
+}
+function backdropClose(e){if(e.target.id==='modalBackdrop')closeModal()}
+
+/* Fechar modal com Escape */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&document.getElementById('modalBackdrop').classList.contains('open')){
+    closeModal();
+  }
+});
+
+/* Focus trap no modal */
+document.getElementById('modalBackdrop').addEventListener('keydown',function(e){
+  if(e.key!=='Tab')return;
+  const modal=document.getElementById('modal');
+  const focusable=modal.querySelectorAll('button,input,select,textarea,a[href],[tabindex]:not([tabindex="-1"])');
+  if(!focusable.length)return;
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus()}}
+  else{if(document.activeElement===last){e.preventDefault();first.focus()}}
+});
+</script>
+</body>
+</html>
